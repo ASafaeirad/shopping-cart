@@ -1,6 +1,6 @@
 import React from "react";
 import { useProducts } from "../../hooks/products";
-import Product from "../../components/Product";
+import Product from "../../components/Product/Product";
 import { isString } from "formik";
 
 export interface ProductType {

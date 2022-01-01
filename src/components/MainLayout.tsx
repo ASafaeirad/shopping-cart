@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { ReactNode } from "react";
 import { useLocation } from "react-router";
-import Footer from "./Footer";
-import Nav from "./Nav";
+import Footer from "./Footer/Footer";
+import Nav from "./Nav/Nav";
 
 interface Props {
   children: ReactNode;

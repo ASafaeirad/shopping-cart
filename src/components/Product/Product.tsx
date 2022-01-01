@@ -1,7 +1,7 @@
 import React from "react";
 import { FC } from "react";
 import { NavLink } from "react-router-dom";
-import { ProductType } from "./../containers/Home/Home";
+import { ProductType } from "../../containers/Home/Home";
 
 interface Props {
   product: ProductType;

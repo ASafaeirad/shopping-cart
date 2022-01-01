@@ -1,6 +1,6 @@
 import React from "react";
-import MenuItem from "./MenuItem";
-import { menuItem } from "../data/MenuItem";
+import MenuItem from "../MenuItem/MenuItem";
+import { menuItem } from "../../data/MenuItem";
 
 const NavMenu = () => {
   return (

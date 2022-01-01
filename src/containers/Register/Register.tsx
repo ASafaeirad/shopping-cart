@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useRegister } from "../../hooks/products";
-import Input from "../../components/Input";
+import Input from "../../components/Input/Input";
 import ReactLoading from "react-loading";
 import { useFormik } from "formik";
 import * as Yup from "yup";

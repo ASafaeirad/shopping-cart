@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useProduct } from "../hooks/products";
+import { useProduct } from "../../hooks/products";
 import { isString } from "formik";
 
 const ProductPage = () => {
