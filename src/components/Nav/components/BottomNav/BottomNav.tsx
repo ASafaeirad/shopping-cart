@@ -1,5 +1,14 @@
+import Logo from "../../../Logo/Logo";
+import NavMenu from "./components/NavMenu/NavMenu";
+import { Wrapper } from './bottomNavStyles';
 const BottomNav = () => {
-  return <div>Bottom Nav</div>;
+  return (
+    <Wrapper>
+      <Logo link="/" />
+
+      <NavMenu />
+    </Wrapper>
+  );
 };
 
 export default BottomNav;

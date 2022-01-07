@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { NavLink } from 'react-router-dom';
 
 interface Props {
-  totalNumber: string;
+  totalnumber: string;
 }
 
 export const NavMenu = styled.ul`
@@ -30,9 +31,9 @@ export const NavMenu = styled.ul`
   }
 `;
 
-export const CartLink = styled.a<Props>`
+export const CartLink = styled(NavLink)<Props>`
   &::before {
-    content: "${(props) => (props.totalNumber ? props.totalNumber : "2")}";
+    content: "${(props) => (props.totalnumber ? props.totalnumber : "2")}";
     position: absolute;
     background-color: #fb7181;
     width: 22px;
@@ -49,3 +50,7 @@ export const CartLink = styled.a<Props>`
     right: -10px;
   }
 `;
+
+export const UserName = styled.span`
+color: royalblue;
+`

@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 2px solid #f5f5f5;
+  padding: 1rem 0; 
   & form {
     background-color: #f5f5f5;
     border-radius: 30px;
@@ -22,3 +22,8 @@ export const Wrapper = styled.div`
 `;
 
 export const RightNav = styled.div``;
+
+export const LoginWrapper = styled.div`
+display:flex;
+align-items:center;
+`

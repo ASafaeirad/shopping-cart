@@ -2,6 +2,7 @@ import React from "react";
 import { useProducts } from "../../hooks/products";
 import Product from "../../components/Product/Product";
 import { isString } from "formik";
+import Header from './components/Header/Header';
 
 export interface ProductType {
   id: number;
@@ -22,6 +23,8 @@ const Home = () => {
   if (isLoading || isString(data)) return <p>Is Loading....</p>;
 
   return (
+    <>
+    <Header />
     <main>
       <section className="products">
         {data?.map((product) => (
@@ -29,6 +32,7 @@ const Home = () => {
         ))}
       </section>
     </main>
+    </>
   );
 };
 

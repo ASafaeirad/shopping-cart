@@ -25,7 +25,6 @@ const Login = () => {
       }),
 
       onSubmit: (user: loginUserType) => {
-        console.log(user);
         mutate(user);
       },
     });

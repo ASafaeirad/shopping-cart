@@ -2,15 +2,19 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useProduct } from "../../hooks/products";
 import { isString } from "formik";
+import { useCartStore } from "../../store/store";
 
 const ProductPage = () => {
   let { id } = useParams();
 
-  const { data, isLoading } = useProduct(id);
+  const { data } = useProduct(id);
+
+  const addToCart = useCartStore((state) => state.addToCart);
 
   if (data === null || isString(data) || data === undefined)
     return <p>Loading....</p>;
   const { title, content, price, image } = data;
+
   return (
     <article className="product__page">
       <div>
@@ -29,7 +33,12 @@ const ProductPage = () => {
           <span className="product__btn">{title}</span>
         </div>
 
-        <button className="product-page__btn">Add To Cart</button>
+        <button
+          className="product-page__btn"
+          onClick={() => addToCart(data)}
+        >
+          Add To Cart
+        </button>
       </div>
     </article>
   );

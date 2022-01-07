@@ -1,23 +1,27 @@
 import User from "../../../../../../svg/User.svg";
 import Cart from "../../../../../../svg/Cart.svg";
-import { CartLink, NavMenu } from "./menuItemsStyles";
+import { CartLink, NavMenu, UserName } from "./menuItemsStyles";
+import { useAuthStore } from "../../../../../../store/store";
+import { NavLink } from "react-router-dom";
 
 const MenuItems = () => {
+  const user = useAuthStore((state) => state.user);
+
   return (
     <NavMenu>
       <li>
-        <a href="#">
+        <NavLink to="/panel">
           <img src={User} alt="user" />
-          My profile
-        </a>
+          <UserName>{user !== undefined ? user.username : null}</UserName>
+        </NavLink>
       </li>
       <li>
-        <CartLink href="#" totalNumber="5">
+        <CartLink to="/cart" totalnumber="5">
           <img src={Cart} alt="user" />
         </CartLink>
       </li>
       <li>
-        <a href="#">Items</a>
+        <NavLink to="/products">Items</NavLink>
       </li>
     </NavMenu>
   );

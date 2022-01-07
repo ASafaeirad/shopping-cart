@@ -25,4 +25,9 @@ a {
     text-decoration :none;
 }
 
+button {
+  background-color: transparent;
+  border:none;
+}
+
 `;

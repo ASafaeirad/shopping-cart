@@ -19,7 +19,7 @@ const useLogin = (
 const useRegister = (user: RegisterUserType): any =>
   useMutation(() => registerUser(user));
 
-// const useGetUser = (id: number) => useQuery(["user", id], () => getUser(id));
+const useGetUser = (id: number | undefined) => useQuery<{} | string>(["user", id], () => getUser(id));
 
-const useGetUser = () => null;
+
 export { useProducts, useProduct, useLogin, useRegister, useGetUser };

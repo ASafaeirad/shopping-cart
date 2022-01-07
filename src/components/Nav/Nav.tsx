@@ -1,28 +1,24 @@
-import React from "react";
-import NavMenu from "../NavMenu/NavMenu";
-import { NavLink } from "react-router-dom";
 import TopNav from "./components/TopNav/TopNav";
 import BottomNav from "./components/BottomNav/BottomNav";
 import { Container } from "react-bootstrap";
-import { NavWrapper } from "./navStyles";
+import { MenuLine, NavWrapper } from "./navStyles";
+
 
 const Nav = () => {
   return (
-    <NavWrapper className="nav">
-      <Container>
-        <TopNav />
+    <>
+      <NavWrapper className="nav">
+        <Container>
+          <TopNav />
+        </Container>
 
-        <BottomNav />
-      </Container>
+        <MenuLine />
 
-      {/* <NavMenu />
-
-      <div className="sign-in">
-        <NavLink to="/login">Login</NavLink>
-
-        <NavLink to="/register">Register</NavLink>
-      </div> */}
-    </NavWrapper>
+        <Container>
+          <BottomNav />
+        </Container>
+      </NavWrapper>
+    </>
   );
 };
 
