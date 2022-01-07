@@ -4,7 +4,6 @@ import { ProductType } from "./../containers/Home/Home";
 interface AuthStore {
   user: any;
   isLogin: boolean;
-  productsCounter: number;
   falseIsLogin: () => any;
   trueIsLogin: () => any;
   setUser: (user: any) => any;
@@ -12,7 +11,9 @@ interface AuthStore {
 
 interface CartStore {
   products: ProductType[];
+  productsCounter: number;
   cartProducts: ProductType[];
+  handleProductsCounter: () => void;
   addToCart: (product: ProductType) => void;
   removeFromCart: (product: ProductType) => void;
   removeCurrentProduct: (product: ProductType) => void;
@@ -23,7 +24,6 @@ const useAuthStore = create<AuthStore>(
     user: undefined,
     setUser: (user) => set({ user: user }),
     isLogin: false,
-    productsCounter: 0,
     falseIsLogin: () => set(() => ({ isLogin: false })),
     trueIsLogin: () => set(() => ({ isLogin: true })),
   })
@@ -33,6 +33,17 @@ const useCartStore = create<CartStore>(
   (set): CartStore => ({
     products: [],
     cartProducts: [],
+    productsCounter: 0,
+    handleProductsCounter: () =>
+      set((state) => {
+        {
+          const cartLength = state.cartProducts.reduce((ack, currentItem) => {
+            return ack + currentItem.amount;
+          }, 0);
+
+          return { productsCounter: cartLength };
+        }
+      }),
     addToCart: (product: ProductType) => {
       set((state) => {
         const isExistProduct = state.cartProducts.find(
@@ -70,7 +81,6 @@ const useCartStore = create<CartStore>(
           )
           .filter((item) => item.amount > 0);
 
-        console.log(state);
         return { cartProducts: [...currentCart] };
       });
     },
