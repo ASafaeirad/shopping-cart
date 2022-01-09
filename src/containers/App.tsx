@@ -19,6 +19,7 @@ const App = () => {
   const falseIsLogin = useAuthStore((state) => state.falseIsLogin);
   const trueIsLogin = useAuthStore((state) => state.trueIsLogin);
   const setUser = useAuthStore((state) => state.setUser);
+  const user = useAuthStore((state) => state.user);
 
   const userData: DecodeToken | undefined = decodedToken();
 
