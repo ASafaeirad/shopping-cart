@@ -1,13 +1,14 @@
-import { useProducts } from "../../hooks/products";
-import Product from "../../components/Product/Product";
 import { isString } from "formik";
+import { useState } from "react";
+import { Container, Row } from "react-bootstrap";
+import { useProducts } from "../../api/hooks";
+import MainLayout from "../../components/MainLayout";
+import Product from "../../components/Product/Product";
+import FilterBtns from "./components/FilterBtns/FilterBtns";
 import Header from "./components/Header/Header";
 import HeaderProduct from "./components/HeaderProduct/HeaderProduct";
-import { Main, ProductsList } from "./homeStyles";
 import Title from "./components/Title/Title";
-import FilterBtns from "./components/FilterBtns/FilterBtns";
-import { Container, Row } from "react-bootstrap";
-import { useState } from "react";
+import { Main, ProductsList } from "./homeStyles";
 
 export interface ProductType {
   id: number;
@@ -23,15 +24,13 @@ export interface ProductType {
 
 const Home = () => {
   const { data, isLoading, isError } = useProducts();
-  const [products, setProducts] = useState(data);
   if (isError) return <p>{isError}</p>;
 
   if (isLoading || isString(data)) return <p>Is Loading....</p>;
 
   return (
-    <>
+    <MainLayout>
       <Header />
-
       <Main>
         <section>
           <div className="container">
@@ -55,7 +54,7 @@ const Home = () => {
           </Container>
         </ProductsList>
       </Main>
-    </>
+    </MainLayout>
   );
 };
 

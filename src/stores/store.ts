@@ -1,12 +1,11 @@
 import create from "zustand";
-import { ProductType } from "./../containers/Home/Home";
+import { ProductType } from "../containers/Home/Home";
 
 interface AuthStore {
-  user: any;
+  user: User | undefined;
   isLogin: boolean;
-  falseIsLogin: () => any;
-  trueIsLogin: () => any;
-  setUser: (user: any) => any;
+  logout: () => any;
+  login: (user: User) => any;
 }
 
 interface CartStore {
@@ -20,12 +19,11 @@ interface CartStore {
 }
 
 const useAuthStore = create<AuthStore>(
-  (set): AuthStore => ({
+  (set, get): AuthStore => ({
     user: undefined,
-    setUser: (user) => set({ user: user }),
-    isLogin: false,
-    falseIsLogin: () => set(() => ({ isLogin: false })),
-    trueIsLogin: () => set(() => ({ isLogin: true })),
+    isLogin: get()?.user != null,
+    logout: () => set({ user: undefined }),
+    login: (user: User) => set({ user }),
   })
 );
 

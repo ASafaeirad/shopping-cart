@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import User from "../../../../../../svg/User.svg";
 import Cart from "../../../../../../svg/Cart.svg";
 import { CartLink, NavMenu, UserName } from "./menuItemsStyles";
-import { useAuthStore, useCartStore } from "../../../../../../store/store";
+import { useAuthStore, useCartStore } from "../../../../../../stores/store";
 import { NavLink } from "react-router-dom";
 
 const MenuItems = () => {

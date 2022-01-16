@@ -1,23 +1,24 @@
-import jwt_decode from "jwt-decode";
+import jwtDecode from "jwt-decode";
 
-export interface DecodeToken {
+export interface AuthPayload {
   exp: number;
   iat: number;
   id: number;
 }
 
-export const decodedToken = (): DecodeToken | undefined => {
-  const token: string | null = localStorage.getItem("token");
+export const decodedToken = (): AuthPayload | undefined => {
+  const token = localStorage.getItem("token");
+  if (!token) return undefined;
 
-  if (token) {
-    const decoded = jwt_decode<DecodeToken>(token);
-    const currentTime = new Date().getTime();
+  const decoded = jwtDecode<AuthPayload>(token);
+  const currentTime = new Date().getTime();
 
-    const isExpired = currentTime - decoded.exp <= 0;
+  const isExpired = currentTime - decoded.exp <= 0;
 
-    if (isExpired) {
-      localStorage.removeItem("token");
-    }
-    return decoded;
+  if (isExpired) {
+    localStorage.removeItem("token");
+    return undefined;
   }
+
+  return decoded;
 };

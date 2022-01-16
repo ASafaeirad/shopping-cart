@@ -1,8 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useProduct } from "../../hooks/products";
+import { useProduct } from "../../api/hooks";
 import { isString } from "formik";
-import { useCartStore } from "../../store/store";
+import { useCartStore } from "../../stores/store";
 
 const ProductPage = () => {
   let { id } = useParams();
@@ -33,10 +33,7 @@ const ProductPage = () => {
           <span className="product__btn">{title}</span>
         </div>
 
-        <button
-          className="product-page__btn"
-          onClick={() => addToCart(data)}
-        >
+        <button className="product-page__btn" onClick={() => addToCart(data)}>
           Add To Cart
         </button>
       </div>

@@ -1,4 +1,4 @@
-import { useCartStore } from "../../store/store";
+import { useCartStore } from "../../stores/store";
 import { CartHeader, Wrapper, CurrentDataTitle } from "./cartStyles";
 import CartItem from "./components/CartItem";
 import { Container } from "react-bootstrap";

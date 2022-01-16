@@ -1,22 +1,25 @@
-import { FC } from "react";
-import { ReactNode } from "react";
-import { useLocation } from "react-router";
+import { Suspense } from "react";
+import { Outlet } from "react-router-dom";
 import Footer from "./Footer/Footer";
 import Nav from "./Nav/Nav";
 
-interface Props {
-  children: ReactNode;
-}
-
-const MainLayout: FC<Props> = ({ children }) => {
-  const { pathname } = useLocation();
-
+export const MainLayout: React.FC = ({ children }) => {
   return (
     <>
       <Nav />
-      <>{children}</>
+      {children}
+      <Footer />
+    </>
+  );
+};
 
-      {pathname === "/login" || pathname === "/register" ? null : <Footer />}
+export const AuthLayout: React.FC = () => {
+  return (
+    <>
+      <Nav />
+      <Suspense fallback={<>Loading 2</>}>
+        <Outlet />
+      </Suspense>
     </>
   );
 };

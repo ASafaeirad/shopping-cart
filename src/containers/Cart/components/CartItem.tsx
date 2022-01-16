@@ -2,7 +2,7 @@ import { FC } from "react";
 import { ProductType } from "./../../Home/Home";
 import { FaRegTimesCircle } from "react-icons/fa";
 import { Wrapper } from "./cartItemStyles";
-import { useCartStore } from "../../../store/store";
+import { useCartStore } from "../../../stores/store";
 
 interface Props {
   product: ProductType;

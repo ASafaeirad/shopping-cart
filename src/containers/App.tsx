@@ -1,61 +1,48 @@
-import { useEffect } from "react";
-import { Route, Routes } from "react-router";
-import MainLayout from "../components/MainLayout";
-import Home from "./Home/Home";
-import ProductPage from "../components/ProductPage/ProductPage";
-import Register from "./Register/Register";
-import Login from "./Login/Login";
-import NotFound from "./NotFound/NotFound";
-import { GlobalStyles } from "./../styles/GlobalStyles";
-import { useAuthStore } from "../store/store";
-import { useGetUser } from "../hooks/products";
-import { DecodeToken, decodedToken } from "./../utils/decoded";
-import Products from "./Products/Products";
-import Contact from "./Contact/Contact";
-import About from "./About/About";
-import Cart from "./Cart/Cart";
+import { lazy, useEffect } from "react";
+import { Route, Navigate, Routes } from "react-router";
+import { useGetUser } from "../api/useGetUser";
+import { AuthLayout } from "../components/MainLayout";
+import { useAuthStore } from "../stores/store";
+import { decodedToken } from "./../utils/decoded";
+
+const ProductPage = lazy(() => import("../components/ProductPage/ProductPage"));
+const NotFound = lazy(() => import("./NotFound/NotFound"));
+const Products = lazy(() => import("./Products/Products"));
+const Contact = lazy(() => import("./Contact/Contact"));
+const About = lazy(() => import("./About/About"));
+const Cart = lazy(() => import("./Cart/Cart"));
+const Home = lazy(() => import("./Home/Home"));
+const Login = lazy(() => import("./Login/LoginPage"));
+const Register = lazy(() => import("./Register/Register"));
 
 const App = () => {
-  const falseIsLogin = useAuthStore((state) => state.falseIsLogin);
-  const trueIsLogin = useAuthStore((state) => state.trueIsLogin);
-  const setUser = useAuthStore((state) => state.setUser);
-  const user = useAuthStore((state) => state.user);
+  const logout = useAuthStore((state) => state.logout);
+  const login = useAuthStore((state) => state.login);
+  const authPayload = decodedToken();
 
-  const userData: DecodeToken | undefined = decodedToken();
-
-  const { data, isLoading } = useGetUser(userData?.id);
-
-  const handleIsLogin = () => {
-    if (userData === undefined) {
-      falseIsLogin();
-    } else {
-      trueIsLogin();
-      setUser(data);
-    }
-  };
+  const { data: user } = useGetUser(authPayload?.id);
 
   useEffect(() => {
-    handleIsLogin();
-  });
-
-  if (isLoading) return <p>Loading....</p>;
+    if (authPayload == null) logout();
+    if (user) login(user);
+  }, [authPayload, login, logout, user]);
 
   return (
-    <MainLayout>
-      <GlobalStyles />
-      <Routes>
-        <Route path="*" element={<NotFound />} />
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/register" element={<Register />}></Route>
-        <Route path="/products" element={<Products />}></Route>
-        <Route path="/contact" element={<Contact />}></Route>
-        <Route path="/about" element={<About />}></Route>
-        <Route path="/cart" element={<Cart />}></Route>
+    <Routes>
+      <Route index element={<Home />} />
+      <Route path="auth/*" element={<AuthLayout />}>
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
+        <Route path="*" element={<Navigate to="/auth/login" />} />
+      </Route>
+      <Route path="/products" element={<Products />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/cart" element={<Cart />} />
 
-        <Route path="/products/:id" element={<ProductPage />}></Route>
-      </Routes>
-    </MainLayout>
+      <Route path="/products/:id" element={<ProductPage />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 };
 

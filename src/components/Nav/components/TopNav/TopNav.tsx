@@ -3,7 +3,7 @@ import ChooseLanguage from "./components/ChooseLanguage/ChooseLanguage";
 import { RightNav, Wrapper, LoginWrapper } from "./topNavStyles";
 import Search from "../../../../svg/Search.svg";
 import MenuItem from "../MenuItem/MenuItem";
-import { useAuthStore } from "../../../../store/store";
+import { useAuthStore } from "../../../../stores/store";
 
 const TopNav = () => {
   const isLogin = useAuthStore((state) => state.isLogin);
@@ -26,8 +26,8 @@ const TopNav = () => {
         </RightNav>
       ) : (
         <LoginWrapper>
-          <MenuItem link="login" text="Login" />
-          <MenuItem link="register" text="Register" marginRNone={true} />
+          <MenuItem link="/auth/login" text="Login" />
+          <MenuItem link="/auth/register" text="Register" marginRNone={true} />
         </LoginWrapper>
       )}
     </Wrapper>

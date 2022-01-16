@@ -6,7 +6,7 @@ export const GlobalStyles = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
   }
-  
+
   body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -16,18 +16,16 @@ export const GlobalStyles = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
   }
 
+  li {
+      list-style: none;
+  }
 
-li {
-    list-style: none;
-}
+  a {
+      text-decoration :none;
+  }
 
-a {
-    text-decoration :none;
-}
-
-button {
-  background-color: transparent;
-  border:none;
-}
-
+  button {
+    background-color: transparent;
+    border:none;
+  }
 `;
